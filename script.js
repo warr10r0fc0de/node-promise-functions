@@ -1,8 +1,10 @@
-const { lookup } = require('dns');
-const { promisify } = require('util');
+const { lookup } = require('dns/promises');
 
-const hostPromise = promisify(lookup);
-
-hostPromise('google.com')
-  .then((address) => console.log(address))
-  .catch((err) => console.log(err));
+(async () => {
+  try {
+    const message = await lookup('google.com');
+    console.log(message);
+  } catch (error) {
+    console.log(error);
+  }
+})();
